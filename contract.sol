@@ -16,4 +16,9 @@ contract Draw {
     {
         return address(this).balance;
     }
+
+    function join() public payable {       // Pay for joining
+        require(msg.value >= 1 ether);  // At least 1 ether is required as payment
+        players.push(msg.sender);         // Saves the player address if he pays for it
+    }
 }
