@@ -21,4 +21,13 @@ contract Draw {
         require(msg.value >= 1 ether);  // At least 1 ether is required as payment
         players.push(msg.sender);         // Saves the player address if he pays for it
     }
+
+    // luck algorithm
+    function randomize() private view returns (uint) {
+        return uint(keccak256(abi.encodePacked(block.difficulty, now, players)));
+    }
+
+    function chooseWinner() public {
+        uint index = randomize() % players.length;       // luck algorithm
+    }
 }
