@@ -29,5 +29,6 @@ contract Draw {
 
     function chooseWinner() public {
         uint index = randomize() % players.length;       // luck algorithm
+        players[index].transfer(address(this).balance);   // sends the money to the winner
     }
 }
