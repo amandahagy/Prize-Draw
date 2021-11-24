@@ -27,10 +27,15 @@ contract Draw {
         return uint(keccak256(abi.encodePacked(block.difficulty, now, players)));
     }
 
-    function chooseWinner() public {
+    function chooseWinner() public restricted {           // manager modifier: restricted
         uint index = randomize() % players.length;       // luck algorithm
         players[index].transfer(address(this).balance);   // sends the money to the winner
         clean( );
+    }
+
+    modifier restricted() {
+        require(msg.sender == contractManager);   // Only the manager can run chooseWinner()
+        _;
     }
 
     // Cleaning it for a new round
