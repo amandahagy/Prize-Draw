@@ -42,4 +42,9 @@ contract Draw {
     function clean() private {
         players = new address[](0);
     }
+
+    // It runs automatically
+    constructor() public {
+        contractManager = msg.sender;  // contract manager = sender
+    }
 }
